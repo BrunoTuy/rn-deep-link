@@ -1,15 +1,10 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Linking
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -20,6 +15,15 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component<{}> {
+  async componentDidMount() {
+    if (Platform.OS === 'android') {
+      const url = await Linking.getInitialURL();
+
+      console.log( ' *** --URL-- *** ' );
+      console.log( ' *** '+decodeURI( url )+' *** ' );
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
